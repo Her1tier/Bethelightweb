@@ -13,7 +13,7 @@ export function StoriesPage() {
       />
 
       <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <SectionHeading title="Latest updates" />
           <div className="grid gap-8 md:grid-cols-2">
             {stories.map((story) => (
@@ -27,7 +27,7 @@ export function StoriesPage() {
                 <span className="text-xs font-semibold uppercase tracking-wider text-primary">
                   {story.category}
                 </span>
-                <time className="mt-1 text-sm text-muted" dateTime={story.date}>
+                <time className="mt-1 text-sm text-ink/70" dateTime={story.date}>
                   {new Date(story.date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
@@ -35,12 +35,12 @@ export function StoriesPage() {
                   })}
                 </time>
                 <h3 className="mt-2 text-xl font-bold text-ink">{story.title}</h3>
-                <p className="mt-2 flex-1 text-muted">{story.excerpt}</p>
+                <p className="mt-2 flex-1 text-ink/70">{story.excerpt}</p>
                 <span className="mt-4 text-sm font-semibold text-primary">Read more →</span>
               </Card>
             ))}
           </div>
-          <p className="mt-12 text-center text-sm text-muted">
+          <p className="mt-12 text-center text-sm text-ink/70">
             Phase 2: full blog with CMS, categories, and individual story pages.
           </p>
         </div>

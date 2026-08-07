@@ -1,14 +1,16 @@
 import { Link, type LinkProps as RouterLinkProps } from 'react-router-dom'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'outline' | 'ghost'
+type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'accent'
 type Size = 'sm' | 'md' | 'lg'
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-primary text-warm-white hover:bg-primary-dark focus-visible:ring-primary',
+    'bg-primary text-warm-white hover:bg-ink focus-visible:ring-primary',
   secondary:
-    'bg-warm-white text-primary hover:bg-sand focus-visible:ring-primary',
+    'bg-warm-white text-primary hover:bg-accent focus-visible:ring-primary',
+  accent:
+    'bg-accent text-ink hover:bg-accent focus-visible:ring-accent',
   outline:
     'border-2 border-primary text-primary hover:bg-primary hover:text-warm-white focus-visible:ring-primary',
   ghost: 'text-primary hover:bg-primary/10 focus-visible:ring-primary',

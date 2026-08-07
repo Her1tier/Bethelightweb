@@ -20,11 +20,11 @@ export function EventsPage() {
         eyebrow="Events"
         title="Show up. Stand up. Give back."
         subtitle="Join us at walks, galas, and community gatherings."
-        cta={{ label: 'Volunteer at events', to: '/volunteer' }}
+        cta={{ label: 'Contact us', to: '/contact' }}
       />
 
       <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <SectionHeading title="Upcoming events" />
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => (
@@ -33,15 +33,15 @@ export function EventsPage() {
                   {formatDate(event.date)}
                 </time>
                 <h3 className="mt-2 text-xl font-bold text-ink">{event.title}</h3>
-                <p className="mt-1 text-sm text-muted">{event.location}</p>
-                <p className="mt-3 text-muted">{event.description}</p>
+                <p className="mt-1 text-sm text-ink/70">{event.location}</p>
+                <p className="mt-3 text-ink/70">{event.description}</p>
                 <Button variant="outline" size="sm" className="mt-4" onClick={() => {}}>
                   Register interest
                 </Button>
               </Card>
             ))}
           </div>
-          <p className="mt-12 text-center text-sm text-muted">
+          <p className="mt-12 text-center text-sm text-ink/70">
             Phase 2: interactive event calendar with registration and reminders.
           </p>
         </div>

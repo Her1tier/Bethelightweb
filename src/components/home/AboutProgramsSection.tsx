@@ -1,123 +1,61 @@
 import { Link } from 'react-router-dom'
-import { aboutSummary, programs } from '../../data/site'
+import { site } from '../../data/site'
 
-const featured = programs.slice(0, 3)
-
-function ProgramIcon({ id }: { id: string }) {
-  const className = 'h-20 w-20 text-primary sm:h-24 sm:w-24 lg:h-28 lg:w-28'
-
-  switch (id) {
-    case 'food-relief':
-      return (
-        <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden>
-          <path
-            d="M12 28c0-8.837 7.163-16 16-16s16 7.163 16 16v4H12v-4z"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M8 36h48v4c0 6.627-5.373 12-12 12H20c-6.627 0-12-5.373-12-12v-4z"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M32 12v8M24 14l4 6M40 14l-4 6"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-        </svg>
-      )
-    case 'education':
-      return (
-        <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden>
-          <path
-            d="M8 24 32 12l24 12-24 12L8 24z"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M16 28v12c0 4.418 7.163 8 16 8s16-3.582 16-8V28"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          <path d="M52 26v16" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      )
-    case 'health':
-      return (
-        <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden>
-          <path
-            d="M32 54s-18-12-18-28a10 10 0 0 1 18-6 10 10 0 0 1 18 6c0 16-18 28-18 28z"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M32 26v14M25 33h14"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-        </svg>
-      )
-    default:
-      return (
-        <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden>
-          <circle cx="32" cy="32" r="20" stroke="currentColor" strokeWidth="3" />
-        </svg>
-      )
-  }
-}
+const STORY_IMAGE =
+  'https://images.unsplash.com/flagged/photo-1579210504744-6b283eddf3ac?auto=format&fit=crop&w=1600&q=85'
 
 export function AboutProgramsSection() {
   return (
-    <div className="flex min-h-screen w-full flex-col bg-warm-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div aria-hidden className="hidden md:block" />
-          <p className="max-w-xl text-left text-base leading-loose text-primary sm:text-lg lg:max-w-2xl">
-            {aboutSummary}
+    <section id="our-story" className="relative w-full overflow-hidden bg-black">
+      <div className="site-container relative z-10 grid grid-cols-1 lg:min-h-[91vh] lg:max-h-dvh lg:grid-cols-2 lg:items-stretch lg:gap-14">
+        <div className="relative flex flex-col justify-center gap-6 py-14 pb-20 sm:py-16 sm:pb-24 lg:py-20 lg:pb-24">
+          <div>
+            <span className="inline-flex bg-accent px-4 py-1.5 text-sm font-semibold text-ink">
+              Our Story
+            </span>
+            <h2 className="mt-5 max-w-md text-3xl font-bold leading-[1.15] tracking-tight text-warm-white sm:text-4xl lg:text-5xl">
+              It Started With a Visit and a Promise.
+            </h2>
+          </div>
+
+          <p className="text-base leading-relaxed text-warm-white/70 sm:text-lg">
+            {site.name} began when a small group of friends visited a rural
+            community and saw children studying by candlelight. They didn&apos;t
+            have much but they promised to return. That promise grew into a
+            movement — focused on food relief, education, health, and housing
+            where need is greatest.
           </p>
+          <Link
+            to="/about"
+            className="inline-flex min-w-[7.5rem] w-fit items-center justify-center border border-warm-white bg-warm-white px-6 py-2 text-sm font-medium leading-normal text-ink transition-colors hover:bg-transparent hover:text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          >
+            Read The Full Story
+          </Link>
+
+          {/* Mobile / stacked: pattern under text column only */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-[60px] -left-4 bg-[length:300px_60px] bg-repeat-x bg-bottom sm:-left-6 lg:hidden"
+            style={{ backgroundImage: 'url(/pattern1.svg)' }}
+          />
+        </div>
+
+        <div className="relative z-10 min-h-[18rem] sm:min-h-[22rem] lg:min-h-0">
+          <img
+            src={STORY_IMAGE}
+            alt="Boy wearing a beige and yellow striped polo shirt"
+            referrerPolicy="no-referrer"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
         </div>
       </div>
 
-      <div className="border-t border-primary/40" aria-hidden />
-
-      <div className="mx-auto flex w-full max-w-7xl flex-1">
-        <div className="relative grid h-full w-full grid-cols-1 md:min-h-[24rem] md:grid-cols-3 lg:min-h-[27rem]">
-          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/3 hidden border-l border-primary/40 md:block" />
-          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-2/3 hidden border-l border-primary/40 md:block" />
-          {featured.map((program, index) => (
-            <Link
-              key={program.id}
-              to="/programs"
-              className={`group flex h-full flex-col items-center px-6 py-12 text-center sm:px-10 sm:py-14 ${
-                index > 0 ? 'border-t border-primary/40 md:border-t-0' : ''
-              }`}
-            >
-              <div
-                className="flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
-                aria-hidden
-              >
-                <ProgramIcon id={program.id} />
-              </div>
-              <h3 className="mt-8 font-serif text-lg font-normal uppercase leading-snug tracking-[0.12em] text-primary sm:text-xl">
-                {program.title}
-              </h3>
-              <p className="mt-6 max-w-xs font-serif text-sm leading-relaxed text-primary/90 sm:text-base">
-                {program.action}
-              </p>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
+      {/* Desktop: full-bleed left to image edge (50vw + half of gap-14) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-0 z-[1] hidden h-[60px] w-[calc(50vw+1.75rem)] bg-[length:300px_60px] bg-repeat-x bg-bottom lg:block"
+        style={{ backgroundImage: 'url(/pattern1.svg)' }}
+      />
+    </section>
   )
 }

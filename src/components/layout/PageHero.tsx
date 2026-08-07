@@ -25,7 +25,7 @@ export function PageHero({
       className={`relative overflow-hidden bg-primary text-warm-white ${compact ? 'py-16' : 'py-24 sm:py-32'}`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(243,234,216,0.15),transparent_50%)]" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative site-container">
         {eyebrow && (
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-warm-white/80">
             {eyebrow}

@@ -28,7 +28,7 @@ export function SectionHeading({
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-4 text-lg ${light ? 'text-warm-white/90' : 'text-muted'}`}>
+        <p className={`mt-4 text-lg ${light ? 'text-warm-white/90' : 'text-ink/70'}`}>
           {subtitle}
         </p>
       )}

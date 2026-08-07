@@ -52,9 +52,9 @@ export function DonationForm() {
           ✓
         </div>
         <h3 className="text-2xl font-bold text-ink">Thank you!</h3>
-        <p className="mt-4 text-muted">{result.message}</p>
+        <p className="mt-4 text-ink/70">{result.message}</p>
         {result.transactionId && (
-          <p className="mt-2 text-sm text-muted">Ref: {result.transactionId}</p>
+          <p className="mt-2 text-sm text-ink/70">Ref: {result.transactionId}</p>
         )}
         <Button className="mt-6" onClick={() => setResult(null)}>
           Make another donation
@@ -86,7 +86,7 @@ export function DonationForm() {
               className={`rounded-full px-5 py-2 text-sm font-medium capitalize transition-colors ${
                 frequency === f
                   ? 'bg-primary text-warm-white'
-                  : 'bg-sand/50 text-ink hover:bg-sand'
+                  : 'bg-ink/10 text-ink hover:bg-accent'
               }`}
             >
               {f === 'one-time' ? 'One-time' : 'Monthly'}
@@ -106,7 +106,7 @@ export function DonationForm() {
               className={`rounded-xl border-2 py-3 font-semibold transition-colors ${
                 amount === preset && !customAmount
                   ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-sand bg-white text-ink hover:border-primary/50'
+                  : 'border-ink/15 bg-warm-white text-ink hover:border-primary/50'
               }`}
             >
               ${preset}
@@ -114,7 +114,7 @@ export function DonationForm() {
           ))}
         </div>
         <label className="mt-4 block">
-          <span className="text-sm font-medium text-muted">Custom amount ($)</span>
+          <span className="text-sm font-medium text-ink/70">Custom amount ($)</span>
           <input
             type="number"
             min="1"
@@ -122,7 +122,7 @@ export function DonationForm() {
             value={customAmount}
             onChange={(e) => setCustomAmount(e.target.value)}
             placeholder="Enter amount"
-            className="mt-1 w-full rounded-xl border border-sand bg-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="mt-1 w-full rounded-xl border border-ink/15 bg-warm-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
         </label>
       </fieldset>
@@ -132,7 +132,7 @@ export function DonationForm() {
         <select
           value={programId}
           onChange={(e) => setProgramId(e.target.value)}
-          className="w-full rounded-xl border border-sand bg-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className="w-full rounded-xl border border-ink/15 bg-warm-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         >
           <option value="">General fund</option>
           {programs.map((p) => (
@@ -143,7 +143,7 @@ export function DonationForm() {
         </select>
       </fieldset>
 
-      <ul className="rounded-xl bg-sand/30 p-4 text-sm text-muted">
+      <ul className="rounded-xl bg-ink/10 p-4 text-sm text-ink/70">
         {impactPerAmount.map((item) => (
           <li key={item.amount} className="flex justify-between gap-4 py-1">
             <span>${item.amount}</span>
@@ -156,27 +156,27 @@ export function DonationForm() {
         <legend className="font-semibold text-ink">Your details</legend>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-muted">
+            <span className="text-sm font-medium text-ink/70">
               First name <span className="text-primary">*</span>
             </span>
             <input
               required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-sand bg-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="mt-1 w-full rounded-xl border border-ink/15 bg-warm-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-muted">Last name</span>
+            <span className="text-sm font-medium text-ink/70">Last name</span>
             <input
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-sand bg-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="mt-1 w-full rounded-xl border border-ink/15 bg-warm-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             />
           </label>
         </div>
         <label className="block">
-          <span className="text-sm font-medium text-muted">
+          <span className="text-sm font-medium text-ink/70">
             Email <span className="text-primary">*</span>
           </span>
           <input
@@ -184,29 +184,29 @@ export function DonationForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-sand bg-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="mt-1 w-full rounded-xl border border-ink/15 bg-warm-white px-4 py-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
         </label>
       </fieldset>
 
-      <div className="rounded-xl border border-sand bg-sand/20 p-4">
+      <div className="rounded-xl border border-ink/15 bg-ink/5 p-4">
         <p className="text-sm font-semibold text-ink">Payment method</p>
-        <p className="mt-1 text-sm text-muted">
+        <p className="mt-1 text-sm text-ink/70">
           Card / bank details will appear here when payment provider is connected.
         </p>
         <div className="mt-3 flex gap-2 opacity-50">
-          <span className="rounded border border-sand bg-white px-3 py-1 text-xs">Visa</span>
-          <span className="rounded border border-sand bg-white px-3 py-1 text-xs">Mastercard</span>
-          <span className="rounded border border-sand bg-white px-3 py-1 text-xs">PayPal</span>
+          <span className="rounded border border-ink/15 bg-warm-white px-3 py-1 text-xs">Visa</span>
+          <span className="rounded border border-ink/15 bg-warm-white px-3 py-1 text-xs">Mastercard</span>
+          <span className="rounded border border-ink/15 bg-warm-white px-3 py-1 text-xs">PayPal</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between border-t border-sand pt-6">
+      <div className="flex items-center justify-between border-t border-ink/15 pt-6">
         <div>
-          <p className="text-sm text-muted">Donation total</p>
+          <p className="text-sm text-ink/70">Donation total</p>
           <p className="text-3xl font-bold text-primary">
             ${effectiveAmount.toLocaleString()}
-            {frequency === 'monthly' && <span className="text-lg font-normal text-muted">/mo</span>}
+            {frequency === 'monthly' && <span className="text-lg font-normal text-ink/70">/mo</span>}
           </p>
         </div>
         <Button type="submit" size="lg" disabled={loading || effectiveAmount < 1}>
@@ -214,7 +214,7 @@ export function DonationForm() {
         </Button>
       </div>
 
-      <p className="text-center text-xs text-muted">
+      <p className="text-center text-xs text-ink/70">
         🔒 Secure donation. 100% of your gift goes to programs (minus payment processing fees).
       </p>
     </form>

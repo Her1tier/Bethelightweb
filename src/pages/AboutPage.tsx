@@ -9,22 +9,22 @@ export function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="Lighting the way since day one"
-        subtitle="Be the Light exists to bring practical help and lasting hope to communities overlooked by traditional aid."
-        cta={{ label: 'Support our mission', to: '/donate' }}
+        subtitle="Kubwabo Foundation exists to bring practical help and lasting hope to communities overlooked by traditional aid."
+        cta={{ label: 'Get involved', to: '/contact' }}
       />
 
       <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <div className="grid gap-16 lg:grid-cols-2">
             <div>
               <h2 className="text-3xl font-bold text-ink">Our story</h2>
-              <p className="mt-4 text-muted leading-relaxed">
-                Founded by community leaders who saw neighbors going without basics, Be the Light
+              <p className="mt-4 text-ink/70 leading-relaxed">
+                Founded by community leaders who saw neighbors going without basics, Kubwabo Foundation
                 started as a weekend food drive and grew into a multi-program NGO serving 28
                 communities. We believe dignity is non-negotiable — aid should empower, not
                 patronize.
               </p>
-              <p className="mt-4 text-muted leading-relaxed">
+              <p className="mt-4 text-ink/70 leading-relaxed">
                 Today we run food relief, education, health, and housing programs with full
                 transparency. Every partner, volunteer, and donor is part of a movement to pass
                 kindness forward.
@@ -39,13 +39,13 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-warm-white py-20">
+        <div className="site-container">
           <SectionHeading title="Mission & vision" align="left" />
           <div className="grid gap-8 md:grid-cols-2">
             <Card hover={false}>
               <h3 className="text-xl font-bold text-primary">Mission</h3>
-              <p className="mt-3 text-muted">
+              <p className="mt-3 text-ink/70">
                 Deliver immediate relief and long-term opportunity to underserved communities
                 through food, education, health, and shelter programs — with transparency and
                 dignity at the center.
@@ -53,7 +53,7 @@ export function AboutPage() {
             </Card>
             <Card hover={false}>
               <h3 className="text-xl font-bold text-primary">Vision</h3>
-              <p className="mt-3 text-muted">
+              <p className="mt-3 text-ink/70">
                 A world where no family goes hungry, no child is denied education, and every
                 community has the resources to thrive on its own terms.
               </p>
@@ -63,13 +63,13 @@ export function AboutPage() {
       </section>
 
       <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <SectionHeading eyebrow="Values" title="What we stand for" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
               <Card key={v.title}>
                 <h3 className="text-lg font-bold text-ink">{v.title}</h3>
-                <p className="mt-2 text-sm text-muted">{v.description}</p>
+                <p className="mt-2 text-sm text-ink/70">{v.description}</p>
               </Card>
             ))}
           </div>
@@ -77,7 +77,7 @@ export function AboutPage() {
       </section>
 
       <section className="bg-primary/5 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <SectionHeading eyebrow="Team" title="Leadership" subtitle="Placeholder bios — replace with real team content." />
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((member) => (
@@ -97,10 +97,10 @@ export function AboutPage() {
             title="Trust & credibility"
             subtitle="Registered nonprofit · Annual impact reports · Partner-verified programs · Secure donations"
           />
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted">
-            <span className="rounded-full border border-sand px-4 py-2">501(c)(3) placeholder</span>
-            <span className="rounded-full border border-sand px-4 py-2">GuideStar profile</span>
-            <span className="rounded-full border border-sand px-4 py-2">Annual report 2025</span>
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-ink/70">
+            <span className="rounded-full border border-ink/15 px-4 py-2">501(c)(3) placeholder</span>
+            <span className="rounded-full border border-ink/15 px-4 py-2">GuideStar profile</span>
+            <span className="rounded-full border border-ink/15 px-4 py-2">Annual report 2025</span>
           </div>
         </div>
       </section>

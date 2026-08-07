@@ -1,4 +1,4 @@
-# Be the Light — Website Brief
+# Kubwabo Foundation — Website Brief
 
 Reference inspiration: [DoGood Charity Theme](https://dogood.qodeinteractive.com/?utm_source=Pinterest&utm_medium=organic)
 
@@ -40,7 +40,7 @@ Brand colors: **#1E8673** (primary), **#F3EAD8** (warm white)
 ### The 60-second rule
 
 Within **60 seconds** of landing, a visitor must understand:
-1. **What** Be the Light does
+1. **What** Kubwabo Foundation does
 2. **Who** it helps
 3. **How** to take action (donate or volunteer)
 
@@ -141,7 +141,7 @@ Review monthly; adjust CTAs and hero copy based on heatmaps (Hotjar/Clarity) aft
 
 ## 11 — Final Note
 
-**Be the Light is not a brochure — it’s a bridge.**
+**Kubwabo Foundation is not a brochure — it’s a bridge.**
 
 Every page should answer one question for a stranger: *“Can I trust these people, and can I help right now?”* Design for warmth and clarity, not clutter. The green (#1E8673) is action and growth; the cream (#F3EAD8) is safety and humanity. When in doubt, shorten the copy, enlarge the CTA, and show real impact.
 
@@ -149,4 +149,4 @@ Build Phase 1 lean. Ship the donate and volunteer paths first. Replace every pla
 
 ---
 
-*Implementation: `/Users/heritier/Projects/be-the-light` — React + Tailwind, mock donation adapter ready for provider swap.*
+*Implementation: `/Users/heritier/Desktop/PROJECTS/Bethelightweb` — React + Tailwind, mock donation adapter ready for provider swap.*

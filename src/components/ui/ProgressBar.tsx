@@ -9,14 +9,14 @@ export function ProgressBar({ raised, goal, label }: Props) {
   return (
     <div className="w-full">
       {label && (
-        <div className="mb-2 flex justify-between text-sm text-muted">
+        <div className="mb-2 flex justify-between text-sm text-ink/70">
           <span>{label}</span>
           <span>
             ${raised.toLocaleString()} of ${goal.toLocaleString()}
           </span>
         </div>
       )}
-      <div className="h-2 overflow-hidden rounded-full bg-sand">
+      <div className="h-2 overflow-hidden rounded-full bg-ink/10">
         <div
           className="h-full rounded-full bg-primary transition-all duration-500"
           style={{ width: `${pct}%` }}

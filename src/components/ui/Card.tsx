@@ -9,7 +9,7 @@ type Props = {
 export function Card({ children, className = '', hover = true }: Props) {
   return (
     <article
-      className={`rounded-2xl border border-sand/60 bg-white p-6 shadow-sm ${hover ? 'transition-shadow hover:shadow-md' : ''} ${className}`}
+      className={`rounded-2xl border border-ink/15 bg-warm-white p-6 shadow-sm ${hover ? 'transition-shadow hover:shadow-md' : ''} ${className}`}
     >
       {children}
     </article>

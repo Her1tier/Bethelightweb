@@ -1,11 +1,14 @@
-# Be the Light
+# Kubwabo Foundation
 
 NGO website built with React, Vite, TypeScript, and Tailwind CSS.
 
 ## Brand
 
-- Primary: `#013333`
-- Warm white: `#F3EAD8`
+- Primary (blue): `#1147FF`
+- Accent (yellow): `#FFCD00`
+- Ink: `#131313`
+- Warm white: `#F6F6F6`
+- Logo: `src/assets/logo.svg`
 
 ## Scripts
 

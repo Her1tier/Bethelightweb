@@ -1,49 +1,32 @@
-import { Link } from 'react-router-dom'
-
 const HERO_UNSPLASH =
   'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1920&q=85'
 
 export function HeroSection() {
   return (
-    <div className="relative min-h-screen w-full">
-      <div className="absolute inset-0 overflow-hidden">
+    <section className="w-full bg-warm-white">
+      <div className="site-container grid grid-cols-1 gap-10 pb-16 pt-24 sm:gap-12 sm:pb-20 sm:pt-28 lg:grid-cols-2 lg:items-end lg:gap-20 lg:pb-24 lg:pt-32 xl:gap-24 xl:pb-28 xl:pt-36 2xl:pb-32 2xl:pt-40">
+        <h1 className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:max-w-2xl sm:text-5xl lg:text-6xl xl:max-w-3xl xl:text-7xl 2xl:text-8xl">
+          Community support and lasting hope.
+        </h1>
+        <p className="max-w-md text-base leading-relaxed text-ink/80 sm:text-lg lg:justify-self-end xl:max-w-lg xl:text-xl">
+          Kubwabo Foundation works with communities, partners, and volunteers to
+          deliver food relief, education, health, and housing where need is
+          greatest.
+        </p>
+      </div>
+
+      <div className="relative min-h-[70vh] w-full overflow-hidden sm:min-h-[75vh] xl:min-h-[80vh]">
         <img
           src={HERO_UNSPLASH}
           alt="Group of children laughing together"
           referrerPolicy="no-referrer"
-          className="h-full w-full min-h-full min-w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-[#013333]/55" aria-hidden />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/15 to-transparent"
+          aria-hidden
+        />
       </div>
-
-      <div className="relative mx-auto flex h-full min-h-screen max-w-7xl items-center px-4 pt-20 sm:px-6 lg:px-8">
-        <div className="grid w-full grid-cols-1 md:grid-cols-2 md:items-center">
-          <div className="w-max max-w-full">
-            <h1 className="flex flex-col uppercase text-warm-white">
-              <span className="whitespace-nowrap text-[clamp(3rem,11vw,8.5rem)] font-bold leading-[0.82] tracking-[-0.02em]">
-                Committed
-              </span>
-              <span className="whitespace-nowrap text-[clamp(3rem,11vw,8.5rem)] font-bold leading-[0.82] tracking-[-0.02em]">
-                To Be the
-              </span>
-              <span className="whitespace-nowrap text-[clamp(3rem,11vw,8.5rem)] font-bold leading-[0.82] tracking-[-0.02em]">
-                Light
-              </span>
-            </h1>
-
-            <Link
-              to="/programs"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-warm-white px-6 py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent sm:mt-8"
-            >
-              How we help
-              <span className="tracking-widest" aria-hidden>
-                &gt;&gt;&gt;
-              </span>
-            </Link>
-          </div>
-          <div aria-hidden className="hidden md:block" />
-        </div>
-      </div>
-    </div>
+    </section>
   )
 }

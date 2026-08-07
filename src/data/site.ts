@@ -1,9 +1,10 @@
 export const site = {
-  name: 'Be the Light',
+  name: 'Kubwabo Foundation',
   tagline: 'Change the world one act of kindness at a time.',
-  email: 'hello@bethelight.org',
+  email: 'hello@kubwabofoundation.org',
   phone: '+1 (555) 123-4567',
   address: '184 Main Collins Street, Victoria 8007',
+  whatsappCommunity: 'https://chat.whatsapp.com/',
   social: {
     facebook: '#',
     instagram: '#',
@@ -13,17 +14,14 @@ export const site = {
 } as const
 
 export const navLinks = [
-  { label: 'Mission', href: '/mission' },
-  { label: 'Programs', href: '/programs' },
-  { label: 'Volunteer', href: '/volunteer' },
-  { label: 'News', href: '/news' },
   { label: 'About', href: '/about' },
+  { label: 'Programs', href: '/programs' },
+  { label: 'Impact stories', href: '/news' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Donate', href: '/donate' },
 ] as const
 
 export const aboutSummary =
-  'Be the Light exists to bring practical help and lasting hope to communities overlooked by traditional aid. Founded by community leaders, we grew from a weekend food drive into an NGO serving 28 communities — with dignity, transparency, and programs in food relief, education, health, and housing.'
+  'Kubwabo Foundation exists to bring practical help and lasting hope to communities overlooked by traditional aid. Founded by community leaders, we grew from a weekend food drive into an NGO serving 28 communities — with dignity, transparency, and programs in food relief, education, health, and housing.'
 
 export const impactStats = [
   { value: '12,400+', label: 'Lives touched' },
@@ -74,7 +72,7 @@ export const programs = [
 export const testimonials = [
   {
     quote:
-      'Be the Light showed up when we had nowhere else to turn. They didn\'t just give us food — they gave us dignity.',
+      'Kubwabo Foundation showed up when we had nowhere else to turn. They didn\'t just give us food — they gave us dignity.',
     name: 'Maria Santos',
     role: 'Community member, São Paulo',
   },
@@ -86,7 +84,7 @@ export const testimonials = [
   },
   {
     quote:
-      'As a partner organization, we trust Be the Light completely. Transparent, fast, and deeply human.',
+      'As a partner organization, we trust Kubwabo Foundation completely. Transparent, fast, and deeply human.',
     name: 'Dr. Elena Vasquez',
     role: 'Partner, Health First Initiative',
   },
@@ -125,7 +123,7 @@ export const stories = [
     date: '2026-04-02',
     category: 'Impact',
     image:
-      'https://images.unsplash.com/photo-1488521787991-ed7b6a063709?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1595917248955-a96ace4780b6?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: '2',
@@ -135,7 +133,7 @@ export const stories = [
     date: '2026-03-18',
     category: 'Education',
     image:
-      'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1547496613-4e19af6736dc?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: '3',
@@ -145,13 +143,13 @@ export const stories = [
     date: '2026-02-28',
     category: 'Health',
     image:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1773140278162-fd7df1043f0c?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: '4',
     title: 'Volunteer spotlight: James',
     excerpt:
-      'From weekend helper to program lead — one volunteer\'s journey with Be the Light.',
+      'From weekend helper to program lead — one volunteer\'s journey with Kubwabo Foundation.',
     date: '2026-02-10',
     category: 'Volunteers',
     image:
