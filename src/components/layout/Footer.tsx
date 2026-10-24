@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { site, navLinks, programs } from '../../data/site'
+import { site, navLinks, programLinks } from '../../data/site'
 
 function ColumnHeading({ children }: { children: ReactNode }) {
   return (
@@ -73,13 +73,13 @@ export function Footer() {
           >
             <ColumnHeading>Programs</ColumnHeading>
             <ul className="space-y-2 text-sm text-warm-white/90 sm:text-base">
-              {programs.map((program) => (
-                <li key={program.id}>
+              {programLinks.map((program) => (
+                <li key={program.href}>
                   <Link
-                    to="/programs"
+                    to={program.href}
                     className="transition-colors hover:text-primary"
                   >
-                    {program.title}
+                    {program.label}
                   </Link>
                 </li>
               ))}
