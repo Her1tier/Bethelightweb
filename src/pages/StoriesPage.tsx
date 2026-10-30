@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { stories } from '../data/site'
+import { useCms } from '../cms/CmsContext'
 
 function formatStoryDate(iso: string) {
   const d = new Date(`${iso}T00:00:00`)
@@ -10,6 +10,7 @@ function formatStoryDate(iso: string) {
 }
 
 export function StoriesPage() {
+  const { stories } = useCms()
   const lastRowStart = stories.length - ((stories.length % 3) || 3)
 
   return (

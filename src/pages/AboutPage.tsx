@@ -3,21 +3,15 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import { team } from '../data/site'
+import { useCms } from '../cms/CmsContext'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const TEAM_PORTRAITS = [
-  'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80',
-] as const
 
 const FOUNDATION_IMAGE =
   'https://images.unsplash.com/photo-1694286080811-e5e416f4fdb1?auto=format&fit=crop&w=2000&q=85'
 
 export function AboutPage() {
+  const { team } = useCms()
   const parallaxWrapRef = useRef<HTMLDivElement>(null)
   const parallaxImgRef = useRef<HTMLImageElement>(null)
 
@@ -229,11 +223,11 @@ export function AboutPage() {
           </div>
 
           <div className="mt-14 grid gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
-            {team.map((member, index) => (
-              <article key={member.name}>
+            {team.map((member) => (
+              <article key={member.id}>
                 <div className="overflow-hidden bg-primary/5">
                   <img
-                    src={TEAM_PORTRAITS[index]}
+                    src={member.image}
                     alt=""
                     referrerPolicy="no-referrer"
                     className="aspect-[3/4] w-full object-cover grayscale transition-[filter] duration-500 ease-out hover:grayscale-0"

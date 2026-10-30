@@ -1,125 +1,16 @@
-import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
+import { useCms } from '../cms/CmsContext'
+import type { ProgramChild } from '../cms/types'
 
 gsap.registerPlugin(ScrollTrigger)
 
-interface ProgramChild {
-  id: string
-  name: string
-  age: number
-  grade: string
-  school: string
-  dream: string
-  location: string
-  image: string
-  story: string
-  monthlyNeed: number
-  fundedPercent: number
-  urgent?: boolean
-}
-
 const PROGRAM_HERO_IMAGE =
   'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1920&q=85'
-
-const CHILDREN: readonly ProgramChild[] = [
-  {
-    id: 'keza',
-    name: 'Keza',
-    age: 8,
-    grade: 'Grade 3',
-    school: 'Kigali Academy',
-    dream: 'Aspiring Teacher',
-    location: 'Kigali, Rwanda',
-    image:
-      'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80',
-    story:
-      'Keza is passionate about reading and spends every afternoon reading stories to younger children in her neighborhood. Her mother sells produce at a local market, and fluctuating income often made regular school fees uncertain. Support covers her full tuition, books, and daily hot lunch.',
-    monthlyNeed: 35,
-    fundedPercent: 65,
-    urgent: true,
-  },
-  {
-    id: 'samuel',
-    name: 'Samuel',
-    age: 10,
-    grade: 'Grade 4',
-    school: 'Bugesera Primary School',
-    dream: 'Aspiring Mechanical Engineer',
-    location: 'Bugesera, Rwanda',
-    image:
-      'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=800&q=80',
-    story:
-      'Samuel has an inventive mind, building miniature wire toy cars and windmills from recycled scraps. With guidance through our program, he received his first complete mathematics and science kit, shoes, and guaranteed daily meals at school.',
-    monthlyNeed: 35,
-    fundedPercent: 40,
-    urgent: true,
-  },
-  {
-    id: 'divine',
-    name: 'Divine',
-    age: 7,
-    grade: 'Grade 2',
-    school: 'Rwamagana Community School',
-    dream: 'Aspiring Doctor',
-    location: 'Rwamagana, Rwanda',
-    image:
-      'https://images.unsplash.com/photo-1547496613-4e19af6736dc?auto=format&fit=crop&w=800&q=80',
-    story:
-      'Full of vibrant curiosity, Divine is at the top of her primary class. She is cared for by her elderly grandmother on a subsistence garden. Sponsorship ensures Divine never misses school due to lack of uniforms, shoes, or school supplies.',
-    monthlyNeed: 35,
-    fundedPercent: 50,
-  },
-  {
-    id: 'eric',
-    name: 'Eric',
-    age: 11,
-    grade: 'Grade 5',
-    school: 'Musanze Primary School',
-    dream: 'Aspiring Agronomist',
-    location: 'Musanze, Rwanda',
-    image:
-      'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80',
-    story:
-      'Eric loves nature and dreams of introducing modern sustainable farming techniques to his community. Last year, unpaid registration fees nearly forced him to drop out. Sponsorship keeps his exam fees and classroom resources secured.',
-    monthlyNeed: 35,
-    fundedPercent: 30,
-    urgent: true,
-  },
-  {
-    id: 'aline',
-    name: 'Aline',
-    age: 9,
-    grade: 'Grade 4',
-    school: 'Kayonza Primary School',
-    dream: 'Aspiring Nurse',
-    location: 'Kayonza, Rwanda',
-    image:
-      'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
-    story:
-      'Aline is gentle, compassionate, and loves helping in community clean-up days. Her family was displaced after severe seasonal rains. Through this program, her school supplies, tuition, and uniforms are fully provided so her learning stays uninterrupted.',
-    monthlyNeed: 35,
-    fundedPercent: 75,
-  },
-  {
-    id: 'patrick',
-    name: 'Patrick',
-    age: 12,
-    grade: 'Grade 6',
-    school: 'Kigali Primary School',
-    dream: 'Aspiring Computer Scientist',
-    location: 'Kigali, Rwanda',
-    image:
-      'https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=800&q=80',
-    story:
-      'Patrick is preparing for his national primary leaving exams. He is fascinated by technology and attends our weekly digital literacy weekend workshops. Sponsorship covers his revision workbooks, exam fees, and nutritious lunches.',
-    monthlyNeed: 35,
-    fundedPercent: 85,
-  },
-] as const
 
 const PROGRAM_PILLARS = [
   {
@@ -142,9 +33,7 @@ const PROGRAM_PILLARS = [
   },
 ] as const
 
-const DONATION_PRESETS = [25, 35, 50, 100]
-
-function ChildDonationModal({
+function ChildProfileModal({
   child,
   onClose,
 }: {
@@ -153,15 +42,6 @@ function ChildDonationModal({
 }) {
   const titleId = useId()
   const closeRef = useRef<HTMLButtonElement>(null)
-  const [frequency, setFrequency] = useState<'monthly' | 'one-time'>('monthly')
-  const [amount, setAmount] = useState<number>(35)
-  const [customAmount, setCustomAmount] = useState<string>('')
-  const [isCustom, setIsCustom] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-
-  const [donorName, setDonorName] = useState('')
-  const [donorEmail, setDonorEmail] = useState('')
-  const [donorNote, setDonorNote] = useState('')
 
   useEffect(() => {
     if (!child) return
@@ -183,19 +63,12 @@ function ChildDonationModal({
 
   if (!child) return null
 
-  const effectiveAmount = isCustom ? Number(customAmount) || 0 : amount
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setSubmitted(true)
-  }
-
   return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
       <button
         type="button"
         className="absolute inset-0 bg-ink/70 backdrop-blur-xs transition-opacity"
-        aria-label="Close donation dialog"
+        aria-label="Close profile dialog"
         onClick={onClose}
       />
 
@@ -203,212 +76,78 @@ function ChildDonationModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto border border-primary/20 bg-warm-white p-6 shadow-2xl sm:p-8"
+        className="relative z-10 grid max-h-[92vh] w-full max-w-4xl overflow-hidden bg-warm-white shadow-2xl md:grid-cols-2"
       >
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <img
-              src={child.image}
-              alt={child.name}
-              className="h-16 w-16 rounded-full object-cover border-2 border-primary/20"
-            />
-            <div>
-              <p className="text-xs font-semibold tracking-[0.14em] text-primary uppercase">
-                {child.dream}
-              </p>
-              <h3
-                id={titleId}
-                className="text-2xl font-semibold tracking-tight text-primary"
-              >
-                Sponsor {child.name}
-              </h3>
-              <p className="text-xs text-primary/70">
-                {child.age} yrs &bull; {child.grade} &bull; {child.school} &bull; {child.location}
-              </p>
-            </div>
-          </div>
+        <div className="relative min-h-[16rem] bg-ink/5 md:min-h-full">
+          <img
+            src={child.image}
+            alt={child.name}
+            referrerPolicy="no-referrer"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </div>
+
+        <div className="relative flex max-h-[92vh] flex-col overflow-y-auto p-6 sm:p-8 lg:p-10">
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="shrink-0 p-1 text-lg font-medium text-primary/70 transition-colors hover:text-primary"
+            className="absolute top-4 right-4 p-1 text-lg font-medium text-primary/50 transition-colors hover:text-primary"
             aria-label="Close modal"
           >
             ✕
           </button>
-        </div>
 
-        {/* Story & Funding Details in Popup */}
-        <div className="mt-5 border-y border-primary/15 py-4 bg-primary/[0.03] -mx-6 px-6 sm:-mx-8 sm:px-8">
-          <div className="flex items-center justify-between text-xs font-semibold text-primary">
-            <span>Need: ${child.monthlyNeed}/mo</span>
-            <span>{child.fundedPercent}% Funded</span>
-          </div>
-          <div className="mt-2 h-1.5 w-full bg-primary/10">
-            <div
-              className="h-full bg-primary"
-              style={{ width: `${child.fundedPercent}%` }}
-            />
-          </div>
-          <p className="mt-3 text-sm leading-relaxed text-primary/80">
-            {child.story}
+          <h3
+            id={titleId}
+            className="pr-8 text-3xl font-semibold tracking-tight text-primary sm:text-4xl"
+          >
+            {child.name}
+          </h3>
+          <p className="mt-2 text-xs font-semibold tracking-[0.14em] text-primary uppercase">
+            {child.dream}
           </p>
-        </div>
 
-        {submitted ? (
-          <div className="mt-8 space-y-6">
-            <div className="border-l-4 border-primary bg-primary/[0.06] p-5">
-              <h4 className="text-lg font-semibold text-primary">
-                Thank you for standing with {child.name}!
-              </h4>
-              <p className="mt-2 text-sm leading-relaxed text-primary/80">
-                Your pledge of <strong className="text-primary">${effectiveAmount} {frequency === 'monthly' ? '/ month' : ''}</strong> directly guarantees tuition, school supplies, daily lunches, and mentorship for {child.name}.
-              </p>
-              {donorNote && (
-                <div className="mt-4 border-t border-primary/15 pt-3">
-                  <p className="text-xs font-medium text-primary/70 uppercase tracking-wider">
-                    Your message to {child.name}:
-                  </p>
-                  <p className="mt-1 text-sm italic text-primary/80">&ldquo;{donorNote}&rdquo;</p>
-                </div>
-              )}
+          <dl className="mt-6 space-y-3 border-t border-primary/15 pt-6 text-sm text-primary">
+            <div className="flex justify-between gap-4">
+              <dt className="text-primary/55">Age</dt>
+              <dd className="font-medium">{child.age} years</dd>
             </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-primary/55">Grade</dt>
+              <dd className="font-medium">{child.grade}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-primary/55">School</dt>
+              <dd className="max-w-[60%] text-right font-medium">
+                {child.school}
+              </dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-primary/55">Location</dt>
+              <dd className="max-w-[60%] text-right font-medium">
+                {child.location}
+              </dd>
+            </div>
+          </dl>
 
-            <p className="text-xs text-primary/70">
-              A detailed sponsorship packet and receipt have been prepared for <strong className="text-primary">{donorEmail || 'your email'}</strong>. Our field team will share regular report updates on {child.name}&apos;s progress throughout the academic term.
+          <div className="mt-6 border-t border-primary/15 pt-6">
+            <p className="text-xs font-semibold tracking-[0.14em] text-primary/55 uppercase">
+              About {child.name}
             </p>
-
-            <button
-              type="button"
-              onClick={onClose}
-              className="inline-flex w-full items-center justify-center bg-primary px-6 py-3 text-sm font-semibold text-warm-white transition-colors hover:opacity-90"
-            >
-              Done
-            </button>
+            <p className="mt-3 text-base leading-relaxed text-primary">
+              {child.story}
+            </p>
           </div>
-        ) : (
-          <form className="mt-6 flex flex-col gap-5" onSubmit={handleSubmit}>
-            {/* Frequency Selector */}
-            <div className="grid grid-cols-2 gap-2 border border-primary/20 p-1 bg-primary/[0.03]">
-              <button
-                type="button"
-                onClick={() => setFrequency('monthly')}
-                className={`py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-colors ${frequency === 'monthly'
-                  ? 'bg-primary text-warm-white shadow-xs'
-                  : 'text-primary/70 hover:text-primary'
-                  }`}
-              >
-                Monthly ($35 Covers all)
-              </button>
-              <button
-                type="button"
-                onClick={() => setFrequency('one-time')}
-                className={`py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-colors ${frequency === 'one-time'
-                  ? 'bg-primary text-warm-white shadow-xs'
-                  : 'text-primary/70 hover:text-primary'
-                  }`}
-              >
-                One-Time Gift
-              </button>
-            </div>
 
-            {/* Amount Selection */}
-            <div>
-              <label className="mb-2 block text-xs font-medium uppercase tracking-[0.12em] text-primary/80">
-                Select Amount (USD)
-              </label>
-              <div className="grid grid-cols-4 gap-2">
-                {DONATION_PRESETS.map((preset) => (
-                  <button
-                    key={preset}
-                    type="button"
-                    onClick={() => {
-                      setAmount(preset)
-                      setIsCustom(false)
-                    }}
-                    className={`border py-2.5 text-sm font-semibold transition-colors ${!isCustom && amount === preset
-                      ? 'border-primary bg-primary text-warm-white'
-                      : 'border-primary/20 bg-white text-primary hover:border-primary'
-                      }`}
-                  >
-                    ${preset}
-                  </button>
-                ))}
-              </div>
-              <div className="mt-2.5">
-                <input
-                  type="number"
-                  min="5"
-                  step="1"
-                  placeholder="Or enter custom amount ($)"
-                  value={customAmount}
-                  onChange={(e) => {
-                    setCustomAmount(e.target.value)
-                    setIsCustom(true)
-                  }}
-                  className="w-full border border-primary/20 bg-white px-4 py-2 text-sm text-primary placeholder:text-primary/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-              <p className="mt-1.5 text-xs text-primary/80">
-                {effectiveAmount >= 35
-                  ? `⭐ Fully covers ${child.name}'s tuition, uniform, school materials, and daily hot meals.`
-                  : `Provides essential books, uniforms, and stationary kits for ${child.name}.`}
-              </p>
-            </div>
-
-            {/* Donor Fields */}
-            <div className="space-y-3 border-t border-primary/15 pt-4">
-              <div>
-                <label className="mb-1 block text-xs font-medium text-primary">
-                  Your Full Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Sarah Jenkins"
-                  value={donorName}
-                  onChange={(e) => setDonorName(e.target.value)}
-                  className="w-full border border-primary/20 bg-white px-4 py-2 text-sm text-primary placeholder:text-primary/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-
-              <div>
-                <label className="mb-1 block text-xs font-medium text-primary">
-                  Your Email Address
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="sarah@example.com"
-                  value={donorEmail}
-                  onChange={(e) => setDonorEmail(e.target.value)}
-                  className="w-full border border-primary/20 bg-white px-4 py-2 text-sm text-primary placeholder:text-primary/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-
-              <div>
-                <label className="mb-1 block text-xs font-medium text-primary">
-                  Personal Note for {child.name}{' '}
-                  <span className="font-normal text-primary/60">(Optional)</span>
-                </label>
-                <textarea
-                  rows={2}
-                  placeholder={`Write an encouraging message to ${child.name}...`}
-                  value={donorNote}
-                  onChange={(e) => setDonorNote(e.target.value)}
-                  className="w-full border border-primary/20 bg-white px-4 py-2 text-sm text-primary placeholder:text-primary/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="mt-2 inline-flex w-full items-center justify-center bg-primary px-6 py-3 text-sm font-semibold text-warm-white transition-colors hover:opacity-90 focus:outline-none"
-            >
-              Confirm ${effectiveAmount || 35} {frequency === 'monthly' ? '/ Month' : ''} Sponsorship
-            </button>
-          </form>
-        )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="mt-8 inline-flex w-full items-center justify-center bg-primary px-6 py-3 text-sm font-semibold tracking-wide text-warm-white uppercase transition-colors hover:bg-ink"
+          >
+            Sponsor
+          </button>
+        </div>
       </div>
     </div>,
     document.body,
@@ -416,6 +155,7 @@ function ChildDonationModal({
 }
 
 export function EveryKidPage() {
+  const { children } = useCms()
   const [selectedChild, setSelectedChild] = useState<ProgramChild | null>(null)
   const parallaxWrapRef = useRef<HTMLDivElement>(null)
   const parallaxImgRef = useRef<HTMLImageElement>(null)
@@ -453,7 +193,7 @@ export function EveryKidPage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
             <div>
               <h1 className="text-3xl font-medium tracking-tight text-primary sm:text-4xl lg:text-5xl">
-                About Every Child
+                Every Child
                 <br />
                 Deserves It.
               </h1>
@@ -542,7 +282,7 @@ export function EveryKidPage() {
 
           {/* Children Grid — 4 cards matching the blog cards architecture */}
           <div className="mt-14 grid grid-cols-1 items-stretch sm:grid-cols-2 lg:grid-cols-4 sm:mt-16 lg:mt-20">
-            {CHILDREN.slice(0, 4).map((child, index) => (
+            {children.slice(0, 4).map((child, index) => (
               <article
                 key={child.id}
                 onClick={() => setSelectedChild(child)}
@@ -607,7 +347,7 @@ export function EveryKidPage() {
 
       {/* Donation Modal Component */}
       {selectedChild && (
-        <ChildDonationModal
+        <ChildProfileModal
           key={selectedChild.id}
           child={selectedChild}
           onClose={() => setSelectedChild(null)}

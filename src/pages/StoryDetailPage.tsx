@@ -1,10 +1,6 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
-import {
-  getStoryBySlug,
-  getStoryGallery,
-  stories,
-  type StoryBlock,
-} from '../data/site'
+import { getStoryGallery, type StoryBlock } from '../data/site'
+import { useCms } from '../cms/CmsContext'
 
 function formatStoryDate(iso: string) {
   const d = new Date(`${iso}T00:00:00`)
@@ -82,7 +78,16 @@ function StoryGallery({ images }: { images: readonly string[] }) {
 
 export function StoryDetailPage() {
   const { slug } = useParams()
+  const { ready, stories, getStoryBySlug } = useCms()
   const story = slug ? getStoryBySlug(slug) : undefined
+
+  if (!ready) {
+    return (
+      <div className="bg-warm-white px-4 py-24 text-center text-sm text-primary/60">
+        Loading story…
+      </div>
+    )
+  }
 
   if (!story) {
     return <Navigate to="/news" replace />

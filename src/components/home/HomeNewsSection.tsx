@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
-import { stories } from '../../data/site'
-
-const featured = stories.slice(0, 3)
+import { useCms } from '../../cms/CmsContext'
 
 function formatStoryDate(iso: string) {
   const d = new Date(`${iso}T00:00:00`)
@@ -12,6 +10,9 @@ function formatStoryDate(iso: string) {
 }
 
 export function HomeNewsSection() {
+  const { stories } = useCms()
+  const featured = stories.slice(0, 3)
+
   return (
     <section className="border-b border-primary/15 bg-warm-white pt-20 lg:pt-24 xl:pt-28">
       <div className="site-container">

@@ -99,11 +99,6 @@ export function Footer() {
                   Contact
                 </Link>
               </li>
-              <li>
-                <Link to="/programs" className="transition-colors hover:text-primary">
-                  Programs
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
